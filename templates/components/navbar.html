@@ -1,0 +1,77 @@
+<header class="site-header">
+  <!-- Promo Banner -->
+  <div class="promo-banner">
+    Extra 5% off on Prepaid Orders!
+  </div>
+
+  <!-- Main Header -->
+  <div class="header-main">
+    <!-- Logo -->
+    <a href="{% url 'home' %}" class="logo">
+      <span>The Anime Store</span>
+    </a>
+
+    <!-- Right-side controls -->
+    <div class="header-controls">
+      <!-- Currency Selector -->
+      <form action="{% url 'set_currency' %}" method="post" class="currency-form">
+    {% csrf_token %}
+   <label for="currency-select">Currency:</label>
+<select id="currency-select" name="currency">
+    <option value="INR" {% if currency == 'INR' %}selected{% endif %}>₹ INR</option>
+    <option value="USD" {% if currency == 'USD' %}selected{% endif %}>$ USD</option>
+    <option value="EUR" {% if currency == 'EUR' %}selected{% endif %}>€ EUR</option>
+    <option value="JPY" {% if currency == 'JPY' %}selected{% endif %}>¥ JPY</option>
+    <option value="CNY" {% if currency == 'CNY' %}selected{% endif %}>¥ CNY</option>
+    <option value="RUB" {% if currency == 'RUB' %}selected{% endif %}>₽ RUB</option>
+    <option value="GBP" {% if currency == 'GBP' %}selected{% endif %}>£ GBP</option>
+</select>
+
+<script>
+document.getElementById('currency-select').addEventListener('change', function() {
+    fetch("{% url 'set_currency' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "currency=" + this.value
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            // Reload current page to reflect new currency
+            location.reload();
+        }
+    });
+});
+</script>
+
+</form>
+
+
+      <!-- Cart -->
+      <div class="cart-icon">
+        <a href="{% url 'cart' %}" class="cart-link">
+          🛒 <span class="cart-count">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    
+      <!-- Dropdown Menu -->
+      <div class="dropdown">
+        <button class="dropdown-toggle" aria-label="Menu">
+          ☰
+        </button>
+        <div class="dropdown-menu">
+          {% if user.is_authenticated %}
+            <a href="{% url 'account' %}" class="dropdown-item">My Orders</a>
+            <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="dropdown-item">Log in</a>
+            <a href="{% url 'signup' %}" class="dropdown-item">Sign Up</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

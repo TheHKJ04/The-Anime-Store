@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Verify OTP - The Anime Store{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1 class="auth-title">Verify Email</h1>
+        <p class="auth-subtitle">
+            Enter 6-digit code sent to <strong>{{ email }}</strong>
+        </p>
+
+        <!-- ✅ Show Django messages (VERY IMPORTANT) -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            <input type="hidden" name="email" value="{{ email }}">
+
+            <div class="form-group">
+                <label for="id_otp">Enter OTP</label>
+                <input 
+                    type="text"
+                    id="id_otp"
+                    name="otp"
+                    maxlength="6"
+                    required
+                    class="otp-code"
+                    autocomplete="one-time-code"
+                    placeholder="123456"
+                    pattern="\d{6}"
+                >
+            </div>
+
+            <button type="submit" class="btn btn-primary full-width">
+                Verify OTP
+            </button>
+        </form>
+
+        <p class="auth-link">
+            Didn’t receive?
+            <a href="{% url 'resend_otp' %}?email={{ email }}">Resend OTP</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

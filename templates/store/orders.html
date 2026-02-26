@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Track Order - The Anime Store{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="order-tracking">
+        <h1>Order #{{ order.order_number }}</h1>
+
+        <!-- <div class="timeline-step {% if order.status in 'pending confirmed shipped delivered' %}active{% endif %}">
+        <div class="step-circle">1</div>
+            <span>Pending</span>
+        </div>
+        <div class="timeline-step {% if order.status in 'confirmed shipped delivered' %}active{% endif %}">
+            <div class="step-circle">2</div>
+            <span>Confirmed</span>
+        </div>
+        <div class="timeline-step {% if order.status in 'shipped delivered' %}active{% endif %}">
+            <div class="step-circle">3</div>
+            <span>Shipped</span>
+        </div>
+        <div class="timeline-step {% if order.status == 'delivered' %}active{% endif %}">
+            <div class="step-circle">4</div>
+            <span>Delivered</span>
+        </div> -->
+        <p>{{ order.status }}</p>
+
+        </div>
+
+        <div class="order-details">
+            <h3>Order Details</h3>
+            <div class="detail-row">
+                <span>Date:</span>
+                <span>{{ order.created_at|date:"M d, Y H:i" }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Total:</span>
+                <span>{{ order.total_amount|floatformat:2 }} {{ order.currency }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span>Payment ID:</span>
+                <span>{{ order.razorpay_payment_id|default:"N/A" }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

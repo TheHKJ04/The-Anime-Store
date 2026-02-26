@@ -1,0 +1,48 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+
+      <!-- Branding -->
+      <div class="footer-section">
+        <h3>The Anime Store</h3>
+        <p>Embrace superior Anime fashion with Anime Stores! Handcrafted for the anime fan within you.</p>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-section newsletter">
+        <h4>Subscribe to our newsletter</h4>
+        <form method="post" action="{% url 'subscribe_newsletter' %}">
+          {% csrf_token %}
+          <input type="email" name="email" placeholder="Email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+
+      <!-- Social Links -->
+      <div class="footer-section social-links">
+        <h4>Follow Us</h4>
+          <a href="https://instagram.com/miraistudio.in" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                 <i class="fab fa-instagram"></i>
+            </a>
+
+      </div>
+
+      <!-- Policies -->
+      <div class="footer-section policies">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="{% url 'refund_policy' %}">Refund policy</a></li>
+          <li><a href="{% url 'privacy_policy' %}">Privacy policy</a></li>
+          <li><a href="{% url 'terms_service' %}">Terms of service</a></li>
+          <li><a href="{% url 'shipping_policy' %}">Shipping policy</a></li>
+          <li><a href="{% url 'contact' %}">Contact information</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      <p>&copy; 2026, The Anime Store. Powered by Django</p>
+    </div>
+  </div>
+</footer>

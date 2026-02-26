@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Checkout - The Anime Store{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Checkout</h1>
+
+    <div class="checkout-grid">
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            {% for item in cart_items %}
+            <div class="summary-item">
+                <span>{{ item.product.name }} × {{ item.quantity }} = </span>
+                <span>{{ item.unit_price|floatformat:2 }} {{ currency }}</span>
+            </div>
+            {% endfor %}
+
+            <div class="total-line">
+                <strong>Total: {{ total|floatformat:2 }} {{ currency }}</strong>
+            </div>
+        </div>
+
+        <div class="address-form">
+            <h3>Shipping Address</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary full-width">
+                    Continue to Payment
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

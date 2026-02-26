@@ -1,0 +1,209 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #ffffff;        /* White background */
+    --bg-secondary: #ffffff;      /* White header/footer */
+    --bg-card: #ffffff;           /* Minimal product cards */
+    --text-primary: #222222;      /* Dark text for readability */
+    --text-secondary: #555555;
+    --accent: #e60023;            /* Red accent (Mirai Studio style) */
+    --accent-hover: #c4001d;
+    --border: #dddddd;
+    --shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* PROMO BANNER */
+.promo-banner {
+    background: var(--accent);
+    color: #fff;                  /* White text for contrast */
+    text-align: center;
+    padding: 0.5rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+}
+
+/* NAVBAR */
+.navbar {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background 0.3s ease;
+    box-shadow: var(--shadow);    /* Subtle shadow for separation */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;         /* Smaller header box */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+}
+
+/* LAYOUT */
+.main-content {
+    margin-top: 80px;             /* Space for fixed navbar */
+    min-height: calc(100vh - 160px);
+    padding: 2rem;
+}
+
+/* PRODUCT CARD (Minimal Style) */
+.product-image {
+    width: 200px;       /* fixed width */
+    height: 200px;      /* fixed height */
+    object-fit: cover;  /* crop/scale to fit box */
+    border-radius: 8px; /* optional rounded corners */
+    display: block;
+    margin: 0 auto;     /* center image */
+}
+
+.product-card {
+    text-align: center;
+    margin: 15px;
+}
+
+
+
+
+
+.product-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.product-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* BUTTONS */
+.btn {
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+}
+
+.btn-secondary:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* ALERTS */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: #f0f0f0;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+/* TOAST */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    z-index: 2000;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .nav-container {
+        padding: 0.5rem;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+}
+

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Payment{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Payment</h2>
+
+    <!-- Order Summary -->
+    <div class="card mb-4">
+        <div class="card-header">
+           <strong> Order Summary</strong>
+        </div>
+        <div class="card-body">
+           {% if order %}
+    <div class="cart-items">
+        <h3>Order Items</h3>
+        {% for item in order.items.all %}
+        <div class="cart-item">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-item-image">
+            <div class="cart-item-details">
+                <h3>{{ item.product.name }}</h3>
+                <p>{{ order.currency }} {{ item.product.price }} × {{ item.quantity }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cart-summary">
+        <div class="total"><strong>Total:</strong> {{ order.currency }} {{ order.total_amount|floatformat:2 }}</div>
+    </div>
+{% else %}
+    <p>No active order found.</p>
+{% endif %}
+
+
+        </div>
+    </div>
+
+    <!-- Payment Form -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="cardNumber" class="form-label">Card Number</label>
+            <input type="text" class="form-control" id="cardNumber" name="card_number" placeholder="1234 5678 9012 3456" required>
+        </div>
+        <div class="mb-3">
+            <label for="expiryDate" class="form-label">Expiry Date</label>
+            <input type="text" class="form-control" id="expiryDate" name="expiry_date" placeholder="MM/YY" required>
+        </div>
+        <div class="mb-3">
+            <label for="cvv" class="form-label">CVV</label>
+            <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Pay Now</button>
+    </form>
+</div>
+{% endblock %}
